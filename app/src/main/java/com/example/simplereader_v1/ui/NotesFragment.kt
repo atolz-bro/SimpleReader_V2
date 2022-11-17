@@ -50,7 +50,9 @@ class NotesFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         val bookName = arguments?.getString(MainActivity.LIBRARY_BOOK_NAME)
         val it = viewModel.getNotes(bookName!!)
-            adapter.submitList(it)
+            adapter.submitList(it.filter {
+                //don't display revision_done note
+                !it.text.equals("") })
     }
 
     override fun onDestroy() {
