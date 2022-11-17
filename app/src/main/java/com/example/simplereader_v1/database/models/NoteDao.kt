@@ -13,6 +13,6 @@ interface NoteDao {
     @Insert
     suspend fun insertNote(note: Note)
 
-    @Query("SELECT COUNT(*) FROM Note WHERE book_name = :bookName")
+    @Query("SELECT COUNT(*) FROM Note WHERE book_name = :bookName AND text != \"\"")
     suspend fun getNoteCount(bookName: String) : Int
 }
