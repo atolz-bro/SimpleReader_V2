@@ -28,26 +28,16 @@ class LibraryBooksAndNotesViewModel(val bookDao: LibraryBookDao, val noteDao: No
 
     //Return list of notes/highlights from last batch/Reading session
     fun getRevisionNote(bookName: String): List<Note>{
-        var notes = getNotes(bookName)
-        val lastNote = notes.last()
-
-        if(lastNote.text.equals("")){
-            //remove revision_done_note(note with text equal to "")
-             notes = notes.subList(0,notes.size-1)
-
-             val lastBatch = getLastBatch(notes)
-             notes = notes.filter {
-                 it.batchNo == lastBatch
-             }
-            return notes
-        }else{
-            //notes with largest batch_no
-            val lastBatch = getLastBatch(notes)
-            notes = notes.filter {
-                it.batchNo == lastBatch
-            }
-             return notes
+        var notes = getNotes(bookName).filter {
+            //filter out revision_done_note
+            !it.text.equals("")
         }
+        //notes with largest batch_no
+        val lastBatch = getLastBatch(notes)
+        notes = notes.filter {
+            it.batchNo == lastBatch
+        }
+        return notes
     }
 
     fun hasRevised(bookName: String): Boolean{
