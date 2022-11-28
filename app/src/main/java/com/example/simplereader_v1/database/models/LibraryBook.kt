@@ -10,4 +10,6 @@ data class LibraryBook(
     val name : String,
     val locationUri : String,
     val thumbnailUri : String,
+    val pageCount: Int = 0,
+    val currentPage: Int = 0
 )

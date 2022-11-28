@@ -1,5 +1,6 @@
 package com.example.simplereader_v1.viewModels
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.simplereader_v1.database.models.LibraryBook
 import com.example.simplereader_v1.database.models.LibraryBookDao
@@ -72,6 +73,7 @@ class LibraryBooksAndNotesViewModel(val bookDao: LibraryBookDao, val noteDao: No
     }
 
     fun addLibraryBook(libraryBook: LibraryBook){
+        Log.i("RA","inAdd")
         viewModelScope.launch {
             bookDao.insertBook(libraryBook);
         }

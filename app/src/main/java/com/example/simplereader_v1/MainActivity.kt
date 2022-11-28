@@ -1,5 +1,6 @@
 package com.example.simplereader_v1
 
+import android.graphics.pdf.PdfDocument
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         val LOCATION_URI = "locationUri"
         val THUMNAIL_URI = "thumbnailUri"
         val ID = "id"
+        val PAGE_COUNT = "pageCount"
+        val CURRENT_PAGE = "currentPage"
         val NOTE_COUNT = "notesCount"
 
     }
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         fragMngr = supportFragmentManager
 
+        Log.d("LC","in MA on create")
         Log.d("Tag","OnCreate")
         fragMngr.beginTransaction()
             .replace(
@@ -76,5 +80,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        Log.d("LC","in MA on pause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d("LC","in MA on stop")
+        super.onStop()
     }
 }

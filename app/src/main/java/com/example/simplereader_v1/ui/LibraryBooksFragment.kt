@@ -75,6 +75,7 @@ class LibraryBooksFragment : Fragment() {
                 binding.noBookInLibrary.visibility = View.GONE
                 binding.addFromPhone.visibility = View.GONE
                 adapter.submitList(it)
+                Log.i("RA",it.toString())
             } else {
                 binding.noBookInLibrary.visibility = View.VISIBLE
                 binding.addFromPhone.visibility = View.VISIBLE
@@ -98,10 +99,13 @@ class LibraryBooksFragment : Fragment() {
             val locationUri = data?.data.toString()
             val thumbnailUri = decodeThumbnail(uri)
             val name = PdfDocumentLoader.openDocument(requireContext(),uri!!).title
+            val numberOfPages = PdfDocumentLoader.openDocument(requireContext(),uri!!).pageCount
             val libraryBook = LibraryBook(
                 name = name!!,
                 locationUri = locationUri,
                 thumbnailUri = thumbnailUri,
+                currentPage = 0,
+                pageCount = numberOfPages
             )
             viewModel.addLibraryBook(libraryBook)
 

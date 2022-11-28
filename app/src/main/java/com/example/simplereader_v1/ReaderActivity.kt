@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.activityViewModels
 import com.example.simplereader_v1.MainActivity
 import com.example.simplereader_v1.R
+import com.example.simplereader_v1.database.models.LibraryBook
 import com.example.simplereader_v1.database.models.Note
 import com.example.simplereader_v1.ui.RevisionFragment
 import com.example.simplereader_v1.viewModels.LibraryBooksAndNotesViewModel
@@ -25,6 +26,7 @@ import com.pspdfkit.configuration.PdfConfiguration
 import com.pspdfkit.configuration.page.PageScrollDirection
 import com.pspdfkit.configuration.page.PageScrollMode
 import com.pspdfkit.datastructures.TextSelection
+import com.pspdfkit.internal.id
 import com.pspdfkit.internal.va
 import com.pspdfkit.ui.PdfFragment
 import com.pspdfkit.ui.special_mode.controller.TextSelectionController
@@ -42,14 +44,16 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
     var isHighlighting = false
     lateinit var fragment : Fragment
     var last_batch  = 0
+    lateinit var bundle : Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reader_activity)
+        Log.d("LC","in RA on create")
 
-        val bundle = intent.extras
-        val documentUri =  Uri.parse(bundle?.getString(MainActivity.LOCATION_URI));
-        bookName = bundle?.getString(MainActivity.LIBRARY_BOOK_NAME)!!
+        bundle = intent.extras!!
+        val documentUri =  Uri.parse(bundle.getString(MainActivity.LOCATION_URI));
+        bookName = bundle.getString(MainActivity.LIBRARY_BOOK_NAME)!!
         last_batch = viewModel.getLastBatchNo(bookName)
         val configuration = PdfConfiguration.Builder()
             .scrollDirection(PageScrollDirection.VERTICAL)
@@ -134,6 +138,7 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
     }
 
     override fun onResume() {
+        Log.d("LC","in RA on resume")
         super.onResume()
         if(!viewModel.hasRevised(bookName)){
             RevisionFragment().show(supportFragmentManager,"revision_dialog")
@@ -142,6 +147,7 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
 
     override fun onResumeFragments() {
         super.onResumeFragments()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -216,5 +222,31 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
 
     override fun onAfterTextSelectionChange(p0: TextSelection?, p1: TextSelection?) {
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val pdfFragment = (fragment as PdfFragment)
+        val libraryBook = LibraryBook(
+            id = bundle.getInt(MainActivity.ID),
+            name = bundle.getString(MainActivity.LIBRARY_BOOK_NAME)!!,
+            locationUri = bundle.getString(MainActivity.LOCATION_URI)!!,
+            thumbnailUri = bundle.getString(MainActivity.THUMNAIL_URI)!!,
+            pageCount = bundle.getInt(MainActivity.PAGE_COUNT),
+            currentPage = pdfFragment.pageIndex,
+        )
+        Log.i("RA",pdfFragment.pageIndex.toString())
+        Log.i("RA",bundle.getInt(MainActivity.ID).toString())
+        viewModel.updateLibraryBook(libraryBook)
+    }
+
+    override fun onStop() {
+
+
+        super.onStop()
+    }
+    override fun onDestroy() {
+
+        super.onDestroy()
     }
 }

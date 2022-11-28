@@ -12,4 +12,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="revision_note_count">%d/%d</string>
     <string name="get_batch_no">Batch %d</string>
+    <string name="progress">%d of %d pages</string>
 </resources>

@@ -47,6 +47,8 @@ class LibraryBooksFragmentAdapter(val context : FragmentActivity, val remove : (
             removeBook.setOnClickListener(){
                 remove(item)
             }
+            progress.text = context.getString(R.string.progress,item.currentPage,item.pageCount)
+
             PopupMenu(context,more).apply {
                 inflate(R.menu.more_options)
                 setOnMenuItemClickListener {
@@ -83,6 +85,8 @@ class LibraryBooksFragmentAdapter(val context : FragmentActivity, val remove : (
                 bundle.putString(MainActivity.THUMNAIL_URI,item.thumbnailUri)
                 bundle.putString(MainActivity.LIBRARY_BOOK_NAME,item.name)
                 bundle.putInt(MainActivity.ID,item.id)
+                bundle.putInt(MainActivity.PAGE_COUNT,item.pageCount)
+                bundle.putInt(MainActivity.CURRENT_PAGE,item.currentPage)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
 

@@ -12,7 +12,7 @@ interface LibraryBookDao {
     @Query("SELECT * FROM library_book")
     fun getLibraryBooksLD() : LiveData<List<LibraryBook>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBook(book: LibraryBook)
 
     @Update
