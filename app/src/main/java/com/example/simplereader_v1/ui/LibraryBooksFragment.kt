@@ -105,7 +105,8 @@ class LibraryBooksFragment : Fragment() {
                 locationUri = locationUri,
                 thumbnailUri = thumbnailUri,
                 currentPage = 0,
-                pageCount = numberOfPages
+                pageCount = numberOfPages,
+                timeUsed = 0
             )
             viewModel.addLibraryBook(libraryBook)
 

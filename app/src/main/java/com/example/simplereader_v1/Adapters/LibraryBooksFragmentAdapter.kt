@@ -49,6 +49,8 @@ class LibraryBooksFragmentAdapter(val context : FragmentActivity, val remove : (
             }
             progress.text = context.getString(R.string.progress,item.currentPage,item.pageCount)
 
+            timeSpent.text = context.getString(R.string.time_in_pdf,item.timeUsed/60)
+
             PopupMenu(context,more).apply {
                 inflate(R.menu.more_options)
                 setOnMenuItemClickListener {
@@ -87,6 +89,7 @@ class LibraryBooksFragmentAdapter(val context : FragmentActivity, val remove : (
                 bundle.putInt(MainActivity.ID,item.id)
                 bundle.putInt(MainActivity.PAGE_COUNT,item.pageCount)
                 bundle.putInt(MainActivity.CURRENT_PAGE,item.currentPage)
+                bundle.putLong(MainActivity.TIME_SPENT,item.timeUsed)
                 intent.putExtras(bundle)
                 context.startActivity(intent)
 

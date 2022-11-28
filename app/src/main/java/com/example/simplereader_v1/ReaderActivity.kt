@@ -46,6 +46,10 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
     var last_batch  = 0
     lateinit var bundle : Bundle
 
+    var startTime = 0L
+    var endTime = 0L
+    var timeUsed = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.reader_activity)
@@ -140,6 +144,7 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
     override fun onResume() {
         Log.d("LC","in RA on resume")
         super.onResume()
+        startTime = System.currentTimeMillis()
         if(!viewModel.hasRevised(bookName)){
             RevisionFragment().show(supportFragmentManager,"revision_dialog")
         }
@@ -225,6 +230,8 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
     }
 
     override fun onPause() {
+        endTime = System.currentTimeMillis()
+        timeUsed = (endTime - startTime)/1000
         super.onPause()
         val pdfFragment = (fragment as PdfFragment)
         val libraryBook = LibraryBook(
@@ -234,6 +241,7 @@ class ReaderActivity : AppCompatActivity(),TextSelectionManager.OnTextSelectionC
             thumbnailUri = bundle.getString(MainActivity.THUMNAIL_URI)!!,
             pageCount = bundle.getInt(MainActivity.PAGE_COUNT),
             currentPage = pdfFragment.pageIndex,
+            timeUsed = timeUsed + bundle.getLong(MainActivity.TIME_SPENT)
         )
         Log.i("RA",pdfFragment.pageIndex.toString())
         Log.i("RA",bundle.getInt(MainActivity.ID).toString())

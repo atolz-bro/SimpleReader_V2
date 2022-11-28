@@ -6,7 +6,7 @@
     <string name="dictionary">Dictionary</string>
     <string name="notes_count">%d Notes</string>
     <string name="no_notes_from_library">You current have no notes</string>
-    <string name="time_in_pdf">%d hrs</string>
+    <string name="time_in_pdf">%d min</string>
     <string name="note">Services,Activity,Broadcast Receivers and Content Providers are android components; ViewModel,LiveData,Room, and Flow are all architecture componets</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

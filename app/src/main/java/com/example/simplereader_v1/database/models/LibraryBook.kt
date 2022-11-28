@@ -11,5 +11,6 @@ data class LibraryBook(
     val locationUri : String,
     val thumbnailUri : String,
     val pageCount: Int = 0,
-    val currentPage: Int = 0
+    val currentPage: Int = 0,
+    val timeUsed: Long = 0
 )

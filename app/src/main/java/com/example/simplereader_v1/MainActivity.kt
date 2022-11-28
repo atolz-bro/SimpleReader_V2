@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val PAGE_COUNT = "pageCount"
         val CURRENT_PAGE = "currentPage"
         val NOTE_COUNT = "notesCount"
+        val TIME_SPENT = "timeSpent"
 
     }
 
