@@ -67,10 +67,16 @@ class RevisionFragment : DialogFragment() {
             }
         }
         prevNote.setOnClickListener(){
-
+            if(myViewPager.currentItem > 0){
+                myViewPager.currentItem = myViewPager.currentItem - 1
+            }
+            view.findViewById<TextView>(R.id.note_count).text = getString(R.string.revision_note_count,myViewPager.currentItem+1,revisionNotes.size)
         }
         nextNote.setOnClickListener {
-
+            if(myViewPager.currentItem < revisionNotes.size){
+                myViewPager.currentItem = myViewPager.currentItem + 1
+            }
+            view.findViewById<TextView>(R.id.note_count).text = getString(R.string.revision_note_count,myViewPager.currentItem+1,revisionNotes.size)
         }
 
         batchNoText.text = getString(R.string.get_batch_no,maxBatchNo)
