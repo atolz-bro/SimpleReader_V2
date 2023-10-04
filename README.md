@@ -6,5 +6,5 @@ https://github.com/atolz-bro/SimpleReader_V2/assets/62163687/5e322329-de45-4d6d-
 https://github.com/atolz-bro/SimpleReader_V2/assets/62163687/180ab110-1c0d-4da5-a79d-2b124e853fdd
 
 <h4>REVISING NOTES HIGHLIGHT IN BATCHES VIDEO DEMO</h4><Br>
-https://github.com/atolz-bro/SimpleReader_V2/assets/62163687/7eed90fd-7182-4cec-a4fb-b08229b6db1f
+https://github.com/atolz-bro/SimpleReader_V2/assets/62163687/c5c28d65-2ced-440e-bb2d-245a30c9d9c2
 
